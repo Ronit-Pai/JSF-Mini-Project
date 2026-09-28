@@ -1,0 +1,186 @@
+.infoPanel {
+    position: absolute;
+    z-index: 999999;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .inner {
+        min-width: 200px;
+        width: 500px;
+        max-width: calc(100vw - 24px);
+        max-height: calc(100vh - 24px);
+        overflow-y: auto;
+        background: #fff;
+        border-radius: 10px;
+        .top {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding: 0px 20px;
+        }
+        .enterUsername {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px 0px;
+            .input {
+                border: none;
+                color: #333;
+                font-size: 18px;
+                font-weight: 700;
+                outline: none;
+                height: 30px;
+                line-height: 30px;
+                padding: 5px;
+                flex: .5;
+                min-width: 0;
+                text-align: center;
+            }
+            .textarea {
+                border: none;
+                color: #333;
+                font-size: 18px;
+                font-weight: 700;
+                outline: none;
+                height: 80px;
+                line-height: 20px;
+                padding: 5px;
+                flex: 1;
+                text-align: center;
+            }
+        }
+        .enterId {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .input {
+                border: none;
+                color: #333;
+                font-size: 18px;
+                font-weight: 700;
+                outline: none;
+                height: 30px;
+                line-height: 30px;
+                padding: 5px;
+                flex: .5;
+                min-width: 0;
+                text-align: center;
+            }
+            .heading {
+                color: #333;
+                font-size: 18px;
+                font-weight: 700;
+                text-align: center;
+                flex: .5;
+            }
+        }
+        .tabs {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p {
+                margin-left: 10px;
+                margin-right: 10px;
+                cursor: pointer;
+                transition: all .3s ease;
+                &:hover {
+                    color: #444;
+                }
+            }
+        }
+        .paragraph {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h1 {
+                color: #333;
+                font-size: 18px;
+                font-weight: 700;
+            }
+            .heading {
+                color: #333;
+                font-size: 18px;
+                font-weight: 700;
+                text-align: center;
+                flex: .3;
+                text-align: center;
+            }
+            .close {
+                color: #333;
+                font-size: 18px;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all .3s ease;
+                &:hover {
+                    color: #222;
+                }
+            }
+        }
+        .bottom {
+            width: 100%;
+            display: flex;
+            border-top: 1px solid #ccc;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            .closeBtn {
+                margin: 0px 5px;
+                padding: 8px 15px;
+                font-size: 15px;
+                color: #333;
+                border: 1px solid #333;
+                border-radius: 7px;
+                transition: all .3s ease;
+                cursor: pointer;
+                &:hover {
+                    color: #fff;
+                    background: #333;
+                }
+            }
+            .closeBtnDisabled {
+                padding: 8px 15px;
+                font-size: 15px;
+                color: #444;
+                border: 1px solid #444;
+                border-radius: 7px;
+                background: #333;
+            }
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .infoPanel .inner {
+        .enterUsername, .enterId {
+            flex-direction: column;
+
+            .input {
+                flex: none;
+                width: calc(100% - 32px);
+                margin-bottom: 12px;
+            }
+
+            p {
+                margin-bottom: 8px;
+            }
+        }
+
+        .tabs p {
+            font-size: 14px;
+            margin-left: 6px;
+            margin-right: 6px;
+        }
+    }
+}

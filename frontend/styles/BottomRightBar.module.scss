@@ -1,0 +1,69 @@
+.bottomRightBar {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    display: flex;
+    align-items: space-between;
+    justify-content: center;
+
+    .toggleTheme {
+        border-radius: 7px;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        cursor: pointer;
+        text-decoration: none !important;
+    }
+
+    .undo {
+        border-radius: 7px;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        cursor: pointer;
+        text-decoration: none !important;
+        color: inherit;
+    }
+
+    .scale {
+        border-radius: 7px;
+        padding: 0px 10px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #222;
+        text-decoration: none !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .bottomRightBar {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        justify-content: flex-end;
+        gap: 4px;
+
+        .toggleTheme, .undo {
+            width: 40px;
+            height: 44px;
+            margin-right: 0;
+            flex-shrink: 0;
+        }
+
+        .scale {
+            height: 44px;
+            padding: 0 6px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+    }
+}
