@@ -1,0 +1,8 @@
+# Local database, logs, and verification artifacts
+.local/
+
+# Private environment configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
