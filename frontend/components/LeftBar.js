@@ -16,7 +16,7 @@ function LeftBar({save, disabled, importFile}) {
         <div className={styles.leftbar}>
             <CreateTooltip
                 id='save'
-                background={{background: `${disabled ? '#222' : backgroundColor}`}}
+                background={{background: `${disabled ? 'rgba(255,255,255,0.04)' : backgroundColor}`}}
                 action={save}
                 icon='💾'
                 type={`${disabled ? 'error' : 'info'}`}

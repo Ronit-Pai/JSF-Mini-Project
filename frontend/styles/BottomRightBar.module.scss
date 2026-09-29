@@ -1,46 +1,78 @@
+@import 'colors';
+
 .bottomRightBar {
     position: absolute;
-    right: 50px;
-    bottom: 50px;
+    right: 24px;
+    bottom: 24px;
     display: flex;
-    align-items: space-between;
+    align-items: center;
     justify-content: center;
+    gap: 8px;
 
     .toggleTheme {
-        border-radius: 7px;
-        width: 45px;
-        height: 45px;
+        border-radius: 12px;
+        width: 44px;
+        height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 15px;
         cursor: pointer;
         text-decoration: none !important;
+        backdrop-filter: blur($glass-blur);
+        -webkit-backdrop-filter: blur($glass-blur);
+        border: 1px solid $glass-border-dark;
+        transition: $transition-smooth;
+        box-shadow: $shadow-sm;
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: $shadow-md;
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+        &:active {
+            transform: translateY(0);
+        }
     }
 
     .undo {
-        border-radius: 7px;
-        width: 45px;
-        height: 45px;
+        border-radius: 12px;
+        width: 44px;
+        height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 15px;
         cursor: pointer;
         text-decoration: none !important;
         color: inherit;
+        backdrop-filter: blur($glass-blur);
+        -webkit-backdrop-filter: blur($glass-blur);
+        border: 1px solid $glass-border-dark;
+        transition: $transition-smooth;
+        box-shadow: $shadow-sm;
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: $shadow-md;
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+        &:active {
+            transform: translateY(0);
+        }
     }
 
     .scale {
-        border-radius: 7px;
-        padding: 0px 10px;
-        height: 45px;
+        border-radius: 12px;
+        padding: 0px 14px;
+        height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 18px;
-        color: #222;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
         text-decoration: none !important;
+        backdrop-filter: blur($glass-blur);
+        -webkit-backdrop-filter: blur($glass-blur);
+        border: 1px solid $glass-border-dark;
+        box-shadow: $shadow-sm;
     }
 }
 
@@ -50,19 +82,18 @@
         right: 12px;
         bottom: 12px;
         justify-content: flex-end;
-        gap: 4px;
+        gap: 6px;
 
         .toggleTheme, .undo {
             width: 40px;
-            height: 44px;
-            margin-right: 0;
+            height: 40px;
             flex-shrink: 0;
         }
 
         .scale {
-            height: 44px;
-            padding: 0 6px;
-            font-size: 14px;
+            height: 40px;
+            padding: 0 8px;
+            font-size: 12px;
             white-space: nowrap;
         }
     }

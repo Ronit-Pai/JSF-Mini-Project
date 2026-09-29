@@ -1,3 +1,5 @@
+@import 'colors';
+
 .fileUploader {
     position: absolute;
     z-index: 999999;
@@ -7,25 +9,40 @@
     top: 0;
     bottom: 0;
     right: 0;
-    background: rgba(255,255,255,0.8);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation: fadeIn 0.3s ease;
 
     .icon {
-        color: #333;
-    font-size:15px;
-    padding: 8px 15px;
-    border-radius: 8px;
-    border: 1px solid #333;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-top: 30px;
-    transition: all .3s ease;
-    &:hover {
-        color: rgba(255,255,255,0.8);
-        background: #333;
+        color: $text-primary-dark;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 24px;
+        border-radius: 10px;
+        border: 1px solid $glass-border-dark;
+        background: $glass-dark;
+        backdrop-filter: blur($glass-blur);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        margin-top: 30px;
+        transition: $transition-smooth;
+        &:hover {
+            background: $accent-gradient;
+            border-color: transparent;
+            color: #fff;
+            box-shadow: $shadow-glow;
+            transform: translateY(-1px);
+        }
     }
-    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

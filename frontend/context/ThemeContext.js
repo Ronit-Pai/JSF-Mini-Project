@@ -2,14 +2,30 @@ import React from 'react'
 
 const themes = {
     dark: {
-      backgroundColor: '#15171A',
-      secondaryColor: '#E2E6EA',
-      color: '#222'
+      backgroundColor: '#0f1117',
+      surfaceColor: 'rgba(26, 29, 39, 0.75)',
+      elevatedColor: '#242836',
+      secondaryColor: 'rgba(26, 29, 39, 0.85)',
+      borderColor: 'rgba(255, 255, 255, 0.12)',
+      textPrimary: '#e8eaed',
+      textSecondary: '#9aa0a8',
+      color: '#e8eaed',
+      accentGradient: 'linear-gradient(135deg, #6c63ff, #a855f7)',
+      shadowColor: 'rgba(0, 0, 0, 0.4)',
+      glassBlur: '16px',
     },
     light: {
-      backgroundColor: '#E2E6EA',
-      secondaryColor: '#1d2125bd',
-      color: '#f2f2f2'
+      backgroundColor: '#f0f2f5',
+      surfaceColor: 'rgba(255, 255, 255, 0.65)',
+      elevatedColor: '#f8f9fb',
+      secondaryColor: 'rgba(255, 255, 255, 0.8)',
+      borderColor: 'rgba(0, 0, 0, 0.06)',
+      textPrimary: '#1a1d27',
+      textSecondary: '#5f6673',
+      color: '#1a1d27',
+      accentGradient: 'linear-gradient(135deg, #6c63ff, #a855f7)',
+      shadowColor: 'rgba(0, 0, 0, 0.1)',
+      glassBlur: '16px',
     }
 }
 

@@ -1,27 +1,42 @@
+@import 'colors';
+
 .leftbar {
     position: absolute;
-    left: 50px;
-    bottom: 50px;
+    left: 24px;
+    bottom: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
 
     a {
-        border-radius: 7px;
-        width: 45px;
-        height: 45px;
+        border-radius: 12px;
+        width: 44px;
+        height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        margin-right: 15px;
         text-decoration: none !important;
+        backdrop-filter: blur($glass-blur);
+        -webkit-backdrop-filter: blur($glass-blur);
+        border: 1px solid $glass-border-dark;
+        transition: $transition-smooth;
+        box-shadow: $shadow-sm;
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: $shadow-md;
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+        &:active {
+            transform: translateY(0);
+        }
     }
 }
 
 @media (max-width: 700px) {
     .leftbar {
         left: 12px;
-        bottom: 68px;
+        bottom: 64px;
     }
 }

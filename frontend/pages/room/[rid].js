@@ -197,10 +197,31 @@ export default function Room() {
                     ready={ready && activeRoom === roomId}
                     notify={notify}
                 />
-                {error && <div role="alert" style={{ position: 'absolute', top: 60, left: '10%', width: '80%', zIndex: 100000000, background: '#fff', color: '#222', padding: 16 }}>
-                    <p>{error}</p>
-                    <button onClick={() => setAttempt(value => value + 1)}>Retry connection</button>{' '}
-                    <button onClick={() => router.push('/')}>Return home</button>
+                {error && <div role="alert" style={{
+                    position: 'absolute', top: 60, left: '50%', transform: 'translateX(-50%)',
+                    width: 'min(480px, 90vw)', zIndex: 100000000,
+                    background: 'rgba(26, 29, 39, 0.9)', backdropFilter: 'blur(16px)',
+                    color: '#e8eaed', padding: '20px 24px', borderRadius: 16,
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
+                    fontFamily: 'Inter, sans-serif', fontSize: 14
+                }}>
+                    <p style={{ margin: '0 0 16px', lineHeight: 1.6 }}>{error}</p>
+                    <div style={{ display: 'flex', gap: 8 }}>
+                        <button onClick={() => setAttempt(value => value + 1)} style={{
+                            padding: '8px 20px', border: 'none', borderRadius: 8,
+                            background: 'linear-gradient(135deg, #6c63ff, #a855f7)',
+                            color: '#fff', fontWeight: 600, fontSize: 13, cursor: 'pointer',
+                            letterSpacing: '0.3px'
+                        }}>Retry connection</button>
+                        <button onClick={() => router.push('/')} style={{
+                            padding: '8px 20px', borderRadius: 8,
+                            background: 'rgba(255,255,255,0.06)',
+                            border: '1px solid rgba(255,255,255,0.12)',
+                            color: '#e8eaed', fontWeight: 600, fontSize: 13, cursor: 'pointer',
+                            letterSpacing: '0.3px'
+                        }}>Return home</button>
+                    </div>
                 </div>}
                 <CustomizedSnackbar
                     open={snackbar.open}

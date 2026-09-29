@@ -3,9 +3,17 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 RUNTIMES="${JSF_RUNTIMES:-$HOME/.local/share/jsf-runtimes}"
-export JAVA_HOME="${JAVA_HOME:-$(find "$RUNTIMES" -maxdepth 1 -type d -name 'jdk-17*' -print -quit)}"
-export PATH="$RUNTIMES/node/bin:$JAVA_HOME/bin:$PATH"
-MONGOD="$(find "$RUNTIMES" -path '*/bin/mongod' -print -quit)"
+
+if [[ -d "$RUNTIMES" ]]; then
+    JAVA_HOME="${JAVA_HOME:-$(find "$RUNTIMES" -maxdepth 1 -type d -name 'jdk-17*' -print -quit)}"
+    MONGOD="$(find "$RUNTIMES" -path '*/bin/mongod' -print -quit)"
+else
+    JAVA_HOME="${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v java)")")")}"
+    MONGOD="$(command -v mongod || true)"
+fi
+
+export JAVA_HOME
+export PATH="${RUNTIMES}/node/bin:$JAVA_HOME/bin:$PATH"
 export MONGODB_URI="mongodb://127.0.0.1:27017/collabcanvas"
 export CORS_ALLOWED_ORIGINS="http://localhost:3000,http://127.0.0.1:3000"
 export NEXT_PUBLIC_API_BASE_URL="http://localhost:8080"

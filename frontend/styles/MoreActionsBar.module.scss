@@ -1,9 +1,15 @@
+@import 'colors';
+
 .moreActionsBar {
     position: absolute;
-    left: 50px;
-    top: 150px;
-    border-radius: 7px;
-    transition: all .3s ease;
+    left: 24px;
+    top: 120px;
+    border-radius: 12px;
+    transition: $transition-smooth;
+    backdrop-filter: blur($glass-blur);
+    -webkit-backdrop-filter: blur($glass-blur);
+    border: 1px solid $glass-border-dark;
+    box-shadow: $shadow-sm;
 
     .openMenu {
         width: 100%;
@@ -12,6 +18,11 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        transition: $transition-smooth;
+        border-radius: 12px;
+        &:hover {
+            transform: scale(1.05);
+        }
     }
 }
 
@@ -20,8 +31,13 @@
     height: 100%;
 
     .closeMenu {
-        margin-left: 15px;
-        margin-top: 10px;
+        margin-left: 12px;
+        margin-top: 8px;
         width: 30px;
+        cursor: pointer;
+        transition: $transition-smooth;
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 }

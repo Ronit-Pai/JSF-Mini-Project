@@ -88,7 +88,7 @@ function ShowChooseNamePanel() {
         <>
             {loading
                 ?   <Spinner
-                        color={'#fff'} 
+                        color={'#6c63ff'} 
                         loading={loading}
                         connecting={connecting}
                     />
@@ -96,8 +96,8 @@ function ShowChooseNamePanel() {
                         <div className={styles.inner}>
                             <div className={styles.top}>
                                 <div className={styles.tabs}>
-                                    <p style={{borderBottom: showCreateRoom ? '2px solid #333' : 'none'}} onClick={changePanel}>Create a Room</p>
-                                    <p style={{borderBottom: !showCreateRoom ? '2px solid #333' : 'none'}} onClick={changePanel}>Join Existing Room</p>
+                                    <p style={{borderBottom: showCreateRoom ? '2px solid #6c63ff' : 'none'}} onClick={changePanel}>Create a Room</p>
+                                    <p style={{borderBottom: !showCreateRoom ? '2px solid #6c63ff' : 'none'}} onClick={changePanel}>Join Existing Room</p>
                                 </div>
                             </div>
                             <div className={styles.middle}>

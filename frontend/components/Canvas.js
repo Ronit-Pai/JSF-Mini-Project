@@ -153,8 +153,8 @@ function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersLis
 
     return (
         <div ref={canvasContainerRef} style={{ position: 'relative', zIndex: 1, width: '100vw', height: '100vh' }}>
-            {loading && <div style={{ background: '#15171A', position: 'absolute', zIndex: 99999999, width: '100vw', height: '100vh' }}>
-                <Spinner color="#fff" loading={loading} connecting={true} />
+            {loading && <div style={{ background: '#0f1117', position: 'absolute', zIndex: 99999999, width: '100vw', height: '100vh' }}>
+                <Spinner color="#6c63ff" loading={loading} connecting={true} />
             </div>}
             <ColorPickerBar setStrokeStyle={setStrokeStyle} />
             <LeftBar save={save} disabled={disabled} importFile={() => setShowFileUploader(true)} />
@@ -173,7 +173,7 @@ function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersLis
             <canvas
                 id="canvas"
                 ref={canvasRef}
-                style={{ width: '100%', height: '100%', display: 'block', background: theme.backgroundColor, touchAction: 'none', cursor: instrument === 'eraser' ? 'none' : 'crosshair' }}
+                style={{ width: '100%', height: '100%', display: 'block', background: `radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 24px 24px, ${theme.backgroundColor}`, touchAction: 'none', cursor: instrument === 'eraser' ? 'none' : 'crosshair' }}
                 onContextMenu={event => event.preventDefault()}
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
