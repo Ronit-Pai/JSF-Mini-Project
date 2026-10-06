@@ -197,10 +197,44 @@ export default function Room() {
                     ready={ready && activeRoom === roomId}
                     notify={notify}
                 />
-                {error && <div role="alert" style={{ position: 'absolute', top: 60, left: '10%', width: '80%', zIndex: 100000000, background: '#fff', color: '#222', padding: 16 }}>
-                    <p>{error}</p>
-                    <button onClick={() => setAttempt(value => value + 1)}>Retry connection</button>{' '}
-                    <button onClick={() => router.push('/')}>Return home</button>
+                {error && <div role="alert" style={{
+                    position: 'absolute', top: 60, left: '50%', transform: 'translateX(-50%)',
+                    width: 'min(480px, 90vw)', zIndex: 100000000,
+                    background: '#fff8e7',
+                    color: '#1a1a2e', padding: '20px 24px', borderRadius: 8,
+                    border: '3px solid #000',
+                    boxShadow: '6px 6px 0px #000',
+                    fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 600
+                }}>
+                    <p style={{ margin: '0 0 16px', lineHeight: 1.6 }}>{error}</p>
+                    <div style={{ display: 'flex', gap: 8 }}>
+                        <button onClick={() => setAttempt(value => value + 1)} style={{
+                            padding: '10px 22px', borderRadius: 4,
+                            background: '#ff6b6b',
+                            border: '3px solid #000',
+                            boxShadow: '4px 4px 0px #000',
+                            color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer',
+                            letterSpacing: '1px', textTransform: 'uppercase',
+                            fontFamily: "'Space Grotesk', sans-serif",
+                            transition: 'transform 0.1s ease, box-shadow 0.1s ease'
+                        }}
+                        onMouseDown={e => { e.target.style.transform = 'translate(3px, 3px)'; e.target.style.boxShadow = '1px 1px 0px #000'; }}
+                        onMouseUp={e => { e.target.style.transform = ''; e.target.style.boxShadow = '4px 4px 0px #000'; }}
+                        >Retry connection</button>
+                        <button onClick={() => router.push('/')} style={{
+                            padding: '10px 22px', borderRadius: 4,
+                            background: '#ffd93d',
+                            border: '3px solid #000',
+                            boxShadow: '4px 4px 0px #000',
+                            color: '#1a1a2e', fontWeight: 700, fontSize: 13, cursor: 'pointer',
+                            letterSpacing: '1px', textTransform: 'uppercase',
+                            fontFamily: "'Space Grotesk', sans-serif",
+                            transition: 'transform 0.1s ease, box-shadow 0.1s ease'
+                        }}
+                        onMouseDown={e => { e.target.style.transform = 'translate(3px, 3px)'; e.target.style.boxShadow = '1px 1px 0px #000'; }}
+                        onMouseUp={e => { e.target.style.transform = ''; e.target.style.boxShadow = '4px 4px 0px #000'; }}
+                        >Return home</button>
+                    </div>
                 </div>}
                 <CustomizedSnackbar
                     open={snackbar.open}

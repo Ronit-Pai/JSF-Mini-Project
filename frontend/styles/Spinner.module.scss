@@ -1,3 +1,5 @@
+@import 'colors';
+
 .spinner {
     display: block;
     position: absolute;
@@ -10,6 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: $light-bg;
 }
 
 .centerInner {
@@ -18,8 +21,18 @@
     align-items: center;
     flex-direction: column;
     .text {
-        color: #fff;
-        font-size: 17px;
-        letter-spacing: 1.5px;
+        color: $text-primary-light;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-top: 20px;
+        animation: blink 1s step-end infinite;
     }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }

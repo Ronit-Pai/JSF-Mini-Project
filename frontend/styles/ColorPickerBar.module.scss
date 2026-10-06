@@ -2,25 +2,27 @@
 
 .colorPickerBarscss {
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 24px;
+    left: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
-    border-radius: 8px;
+    height: 42px;
+    border-radius: $radius-sm;
     overflow: hidden;
+    box-shadow: $shadow-brutal-md;
+    border: $border-thick;
 
     div {
         margin: 0;
         padding: 0;
         position: relative;
         height: 100%;
-        width: 35px;
+        width: 36px;
         cursor: pointer;
-        transition: all .3s ease-in-out;
+        transition: $transition-fast;
         &:hover {
-            width: 40px;
+            width: 48px;
         }
     }
 }

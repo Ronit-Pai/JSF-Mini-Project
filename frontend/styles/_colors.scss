@@ -1,3 +1,49 @@
-$orange: orange;
-$purple: purple;
+// ── Neo-Brutalism Color Palette ──
 
+// Core background tones
+$dark-bg: #1a1a2e;
+$dark-surface: #16213e;
+$dark-elevated: #0f3460;
+$dark-border: #000000;
+
+// Light / Cream tones
+$light-bg: #f5f0e8;
+$light-surface: #ffffff;
+$light-elevated: #fff8e7;
+$light-border: #000000;
+
+// Neo-Brut Accent Colors (vivid, flat, no gradients)
+$accent-primary: #ff6b6b;
+$accent-secondary: #ffd93d;
+$accent-blue: #6bcbff;
+$accent-green: #51cf66;
+$accent-purple: #cc5de8;
+$accent-orange: #ff922b;
+
+// Borders — the hallmark of neo-brutalism
+$border-thick: 3px solid #000;
+$border-thin: 2px solid #000;
+
+// Hard offset shadows (no blur, no spread — just raw offset)
+$shadow-brutal-sm: 3px 3px 0px #000;
+$shadow-brutal-md: 5px 5px 0px #000;
+$shadow-brutal-lg: 8px 8px 0px #000;
+
+// Pressed / active shadow
+$shadow-brutal-pressed: 1px 1px 0px #000;
+
+// Text
+$text-primary-dark: #ffffff;
+$text-secondary-dark: #b8c1d0;
+$text-primary-light: #1a1a2e;
+$text-secondary-light: #4a4a6a;
+
+// Transitions (snappier for brutalism)
+$transition-fast: 0.1s ease;
+$transition-smooth: 0.15s ease;
+$transition-spring: 0.2s ease;
+
+// Border radius (less rounded — more chunky)
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;

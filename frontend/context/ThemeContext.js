@@ -2,26 +2,40 @@ import React from 'react'
 
 const themes = {
     dark: {
-      backgroundColor: '#15171A',
-      secondaryColor: '#E2E6EA',
-      color: '#222'
+      backgroundColor: '#1a1a2e',
+      surfaceColor: '#16213e',
+      elevatedColor: '#0f3460',
+      secondaryColor: '#0f3460',
+      borderColor: '#000000',
+      textPrimary: '#ffffff',
+      textSecondary: '#b8c1d0',
+      color: '#ffffff',
+      accentColor: '#ff6b6b',
+      shadowColor: '#000000',
     },
     light: {
-      backgroundColor: '#E2E6EA',
-      secondaryColor: '#1d2125bd',
-      color: '#f2f2f2'
+      backgroundColor: '#f5f0e8',
+      surfaceColor: '#ffffff',
+      elevatedColor: '#fff8e7',
+      secondaryColor: '#fff8e7',
+      borderColor: '#000000',
+      textPrimary: '#1a1a2e',
+      textSecondary: '#4a4a6a',
+      color: '#1a1a2e',
+      accentColor: '#ff6b6b',
+      shadowColor: '#000000',
     }
 }
 
 const initialState = {
-    dark: true,
-    theme: themes.dark,
+    dark: false,
+    theme: themes.light,
     toggle: () => {}
   }
 const ThemeContext = React.createContext(initialState)
 
 function ThemeProvider({ children }) {
-  const [dark, setDark] = React.useState(true) // Default theme is dark
+  const [dark, setDark] = React.useState(false) // Default theme is light for neo-brutalism
 
   // On mount, read the preferred theme from the persistence
   React.useEffect(() => {

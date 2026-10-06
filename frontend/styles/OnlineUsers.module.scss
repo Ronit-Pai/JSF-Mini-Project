@@ -1,22 +1,28 @@
+@import 'colors';
+
 .onlineUsers {
     position: absolute;
-    right: 50px;
-    top: 50px;
-    background: #E2E6EA;
-    border-radius: 7px;
+    right: 24px;
+    top: 24px;
+    border: $border-thick;
+    border-radius: $radius-sm;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 5px;
-    height: 45px;    
+    padding-left: 12px;
+    padding-right: 8px;
+    height: 42px;
+    box-shadow: $shadow-brutal-sm;
+    transition: $transition-fast;
 
     p {
         margin: 0;
         padding: 0;
-        margin-right: 5px;
-        font-weight: 600px;
-        font-size: 18px;
+        margin-right: 4px;
+        font-weight: 700;
+        font-size: 14px;
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 0.3px;
     }
 }
 
@@ -24,6 +30,6 @@
     .onlineUsers {
         top: 12px;
         right: 12px;
-        height: 40px;
+        height: 36px;
     }
 }

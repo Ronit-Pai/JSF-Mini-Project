@@ -1,27 +1,40 @@
+@import 'colors';
+
 .leftbar {
     position: absolute;
-    left: 50px;
-    bottom: 50px;
+    left: 24px;
+    bottom: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
 
     a {
-        border-radius: 7px;
-        width: 45px;
-        height: 45px;
+        border-radius: $radius-sm;
+        width: 46px;
+        height: 46px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        margin-right: 15px;
         text-decoration: none !important;
+        border: $border-thick;
+        transition: $transition-fast;
+        box-shadow: $shadow-brutal-sm;
+        &:hover {
+            transform: translate(2px, 2px);
+            box-shadow: $shadow-brutal-pressed;
+        }
+        &:active {
+            transform: translate(3px, 3px);
+            box-shadow: none;
+        }
     }
 }
 
 @media (max-width: 700px) {
     .leftbar {
         left: 12px;
-        bottom: 68px;
+        bottom: 64px;
     }
 }

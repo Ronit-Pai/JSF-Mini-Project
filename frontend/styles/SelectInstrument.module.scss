@@ -1,3 +1,5 @@
+@import 'colors';
+
 .selectInstrument {
     width: 100%;
     height: 100%;
@@ -8,25 +10,28 @@
     font-size: 18px;
     .instrument {
         position: relative;
-        width: 35px;
-        height: 35px;
-        border-radius: 8px;
+        width: 36px;
+        height: 36px;
+        border-radius: $radius-sm;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 5px;
-        /* cursor: pointer; */
-        transition: all .3s ease-in-out;
+        transition: $transition-fast;
+        border: $border-thin;
         &:hover {
-            background: #bbb !important;
+            background: $accent-secondary !important;
+            transform: translate(1px, 1px);
         }
         .pencilMenu {
-            border-radius: 8px;
+            border-radius: $radius-sm;
             position: absolute;
             top: 0;
             left: 45px;
-            transition: all .4s ease;
+            transition: $transition-smooth;
             overflow: hidden;
+            border: $border-thick;
+            box-shadow: $shadow-brutal-md;
             .row {
                 width: 100%;
                 display: flex;
@@ -36,9 +41,11 @@
                 div {
                     border-radius: 50%;
                     cursor: pointer;
-                    transition: all .3s ease;
+                    transition: $transition-fast;
+                    border: $border-thin;
                     &:hover {
-                        background: green !important;
+                        border-color: $accent-primary;
+                        transform: scale(1.15);
                     }
                 }
                 .circlexxs {

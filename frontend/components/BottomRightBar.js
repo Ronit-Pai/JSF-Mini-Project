@@ -145,7 +145,7 @@ function BottomRightBar({scale, undo, clearBoard, disabled, setRoomId, roomId}) 
 
                 <CreateTooltip
                     id='clearBoard'
-                    background={{background: `${disabled ? '#222' : backgroundColor}`}}
+                    background={{background: `${disabled ? 'rgba(255,255,255,0.04)' : backgroundColor}`}}
                     action={() => { if (!disabled) clearBoard(); }}
                     stylesClass={styles.toggleTheme}
                     icon='🗑️'
@@ -157,7 +157,7 @@ function BottomRightBar({scale, undo, clearBoard, disabled, setRoomId, roomId}) 
                 {/* Undo */}
                 <CreateTooltip
                     id='undo'
-                    background={{background: `${disabled ? '#222' : backgroundColor}`}}
+                    background={{background: `${disabled ? 'rgba(255,255,255,0.04)' : backgroundColor}`}}
                     action={undo}
                     stylesClass={styles.undo}
                     icon='↺'

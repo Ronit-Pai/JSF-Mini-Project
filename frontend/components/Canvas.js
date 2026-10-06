@@ -15,7 +15,7 @@ function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersLis
     const { theme } = React.useContext(ThemeContext);
     const [lineWidth, setLineWidth] = useState(3);
     const [instrument, setInstrument] = useState('pencil');
-    const [strokeStyle, setStrokeStyle] = useState('#ffffff');
+    const [strokeStyle, setStrokeStyle] = useState('#1a1a2e');
     const [showFileUploader, setShowFileUploader] = useState(false);
     const [showInfoPanel, setShowInfoPanel] = useState(true);
     const [cursor, setCursor] = useState({ x: 0, y: 0 });
@@ -151,10 +151,13 @@ function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersLis
         }
     };
 
+    // Neo-brutalism grid: solid dots on a clean background
+    const canvasBg = `radial-gradient(circle, rgba(0,0,0,0.12) 1.5px, transparent 1.5px) 0 0 / 28px 28px, ${theme.backgroundColor}`;
+
     return (
         <div ref={canvasContainerRef} style={{ position: 'relative', zIndex: 1, width: '100vw', height: '100vh' }}>
-            {loading && <div style={{ background: '#15171A', position: 'absolute', zIndex: 99999999, width: '100vw', height: '100vh' }}>
-                <Spinner color="#fff" loading={loading} connecting={true} />
+            {loading && <div style={{ background: theme.backgroundColor, position: 'absolute', zIndex: 99999999, width: '100vw', height: '100vh' }}>
+                <Spinner color="#ff6b6b" loading={loading} connecting={true} />
             </div>}
             <ColorPickerBar setStrokeStyle={setStrokeStyle} />
             <LeftBar save={save} disabled={disabled} importFile={() => setShowFileUploader(true)} />
@@ -173,7 +176,7 @@ function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersLis
             <canvas
                 id="canvas"
                 ref={canvasRef}
-                style={{ width: '100%', height: '100%', display: 'block', background: theme.backgroundColor, touchAction: 'none', cursor: instrument === 'eraser' ? 'none' : 'crosshair' }}
+                style={{ width: '100%', height: '100%', display: 'block', background: canvasBg, touchAction: 'none', cursor: instrument === 'eraser' ? 'none' : 'crosshair' }}
                 onContextMenu={event => event.preventDefault()}
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
@@ -186,7 +189,7 @@ function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersLis
                 width: lineWidth * view.scale,
                 height: lineWidth * view.scale,
                 borderRadius: '50%',
-                border: `1px solid ${theme.secondaryColor}`,
+                border: `2px solid #000`,
                 position: 'absolute',
                 zIndex: 999999999,
                 top: cursor.y - lineWidth * view.scale / 2,

@@ -1,46 +1,74 @@
+@import 'colors';
+
 .bottomRightBar {
     position: absolute;
-    right: 50px;
-    bottom: 50px;
+    right: 24px;
+    bottom: 24px;
     display: flex;
-    align-items: space-between;
+    align-items: center;
     justify-content: center;
+    gap: 8px;
 
     .toggleTheme {
-        border-radius: 7px;
-        width: 45px;
-        height: 45px;
+        border-radius: $radius-sm;
+        width: 46px;
+        height: 46px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 15px;
         cursor: pointer;
         text-decoration: none !important;
+        border: $border-thick;
+        transition: $transition-fast;
+        box-shadow: $shadow-brutal-sm;
+        &:hover {
+            transform: translate(2px, 2px);
+            box-shadow: $shadow-brutal-pressed;
+        }
+        &:active {
+            transform: translate(3px, 3px);
+            box-shadow: none;
+        }
     }
 
     .undo {
-        border-radius: 7px;
-        width: 45px;
-        height: 45px;
+        border-radius: $radius-sm;
+        width: 46px;
+        height: 46px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 15px;
         cursor: pointer;
         text-decoration: none !important;
         color: inherit;
+        border: $border-thick;
+        transition: $transition-fast;
+        box-shadow: $shadow-brutal-sm;
+        &:hover {
+            transform: translate(2px, 2px);
+            box-shadow: $shadow-brutal-pressed;
+        }
+        &:active {
+            transform: translate(3px, 3px);
+            box-shadow: none;
+        }
     }
 
     .scale {
-        border-radius: 7px;
-        padding: 0px 10px;
-        height: 45px;
+        border-radius: $radius-sm;
+        padding: 0px 14px;
+        height: 46px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 18px;
-        color: #222;
+        font-size: 13px;
+        font-weight: 700;
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 0.5px;
         text-decoration: none !important;
+        border: $border-thick;
+        box-shadow: $shadow-brutal-sm;
+        text-transform: uppercase;
     }
 }
 
@@ -50,19 +78,18 @@
         right: 12px;
         bottom: 12px;
         justify-content: flex-end;
-        gap: 4px;
+        gap: 6px;
 
         .toggleTheme, .undo {
             width: 40px;
-            height: 44px;
-            margin-right: 0;
+            height: 40px;
             flex-shrink: 0;
         }
 
         .scale {
-            height: 44px;
-            padding: 0 6px;
-            font-size: 14px;
+            height: 40px;
+            padding: 0 8px;
+            font-size: 12px;
             white-space: nowrap;
         }
     }
