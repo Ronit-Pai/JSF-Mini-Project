@@ -7,11 +7,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
-    border-radius: 12px;
+    height: 42px;
+    border-radius: $radius-sm;
     overflow: hidden;
-    box-shadow: $shadow-md;
-    border: 1px solid $glass-border-dark;
+    box-shadow: $shadow-brutal-md;
+    border: $border-thick;
 
     div {
         margin: 0;
@@ -20,15 +20,9 @@
         height: 100%;
         width: 36px;
         cursor: pointer;
-        transition: $transition-spring;
+        transition: $transition-fast;
         &:hover {
-            width: 44px;
-        }
-        &:first-child {
-            border-radius: 12px 0 0 12px;
-        }
-        &:last-child {
-            border-radius: 0 12px 12px 0;
+            width: 48px;
         }
     }
 }

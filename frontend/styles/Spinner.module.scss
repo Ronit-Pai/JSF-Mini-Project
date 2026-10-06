@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: $dark-bg;
+    background: $light-bg;
 }
 
 .centerInner {
@@ -21,17 +21,18 @@
     align-items: center;
     flex-direction: column;
     .text {
-        color: $text-secondary-dark;
+        color: $text-primary-light;
         font-size: 14px;
-        font-weight: 500;
-        letter-spacing: 2px;
+        font-weight: 700;
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 3px;
         text-transform: uppercase;
         margin-top: 20px;
-        animation: pulse 2s ease-in-out infinite;
+        animation: blink 1s step-end infinite;
     }
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }

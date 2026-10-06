@@ -10,26 +10,24 @@
     gap: 8px;
 
     a {
-        border-radius: 12px;
-        width: 44px;
-        height: 44px;
+        border-radius: $radius-sm;
+        width: 46px;
+        height: 46px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         text-decoration: none !important;
-        backdrop-filter: blur($glass-blur);
-        -webkit-backdrop-filter: blur($glass-blur);
-        border: 1px solid $glass-border-dark;
-        transition: $transition-smooth;
-        box-shadow: $shadow-sm;
+        border: $border-thick;
+        transition: $transition-fast;
+        box-shadow: $shadow-brutal-sm;
         &:hover {
-            transform: translateY(-2px);
-            box-shadow: $shadow-md;
-            border-color: rgba(108, 99, 255, 0.3);
+            transform: translate(2px, 2px);
+            box-shadow: $shadow-brutal-pressed;
         }
         &:active {
-            transform: translateY(0);
+            transform: translate(3px, 3px);
+            box-shadow: none;
         }
     }
 }

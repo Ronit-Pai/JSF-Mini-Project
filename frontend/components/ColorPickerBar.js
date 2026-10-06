@@ -3,14 +3,14 @@ import styles from '../styles/ColorPickerBar.module.scss'
 
 function ColorPickerBar({setStrokeStyle}) {
     const colorList = [
-        '#e8eaed',
-        '#ef4444',
-        '#f97316',
-        '#eab308',
-        '#22c55e',
-        '#3b82f6',
-        '#8b5cf6',
-        '#ec4899',
+        '#1a1a2e',
+        '#ff6b6b',
+        '#ff922b',
+        '#ffd93d',
+        '#51cf66',
+        '#6bcbff',
+        '#cc5de8',
+        '#ffffff',
     ];
 
     const changeStrokeStyle = (color) => {

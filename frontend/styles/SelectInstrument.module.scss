@@ -10,29 +10,28 @@
     font-size: 18px;
     .instrument {
         position: relative;
-        width: 35px;
-        height: 35px;
-        border-radius: 10px;
+        width: 36px;
+        height: 36px;
+        border-radius: $radius-sm;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 5px;
-        /* cursor: pointer; */
-        transition: $transition-smooth;
+        transition: $transition-fast;
+        border: $border-thin;
         &:hover {
-            background: rgba(108, 99, 255, 0.2) !important;
+            background: $accent-secondary !important;
+            transform: translate(1px, 1px);
         }
         .pencilMenu {
-            border-radius: 12px;
+            border-radius: $radius-sm;
             position: absolute;
             top: 0;
             left: 45px;
             transition: $transition-smooth;
             overflow: hidden;
-            backdrop-filter: blur($glass-blur);
-            -webkit-backdrop-filter: blur($glass-blur);
-            border: 1px solid $glass-border-dark;
-            box-shadow: $shadow-md;
+            border: $border-thick;
+            box-shadow: $shadow-brutal-md;
             .row {
                 width: 100%;
                 display: flex;
@@ -42,11 +41,11 @@
                 div {
                     border-radius: 50%;
                     cursor: pointer;
-                    transition: $transition-smooth;
-                    border: 2px solid transparent;
+                    transition: $transition-fast;
+                    border: $border-thin;
                     &:hover {
                         border-color: $accent-primary;
-                        box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
+                        transform: scale(1.15);
                     }
                 }
                 .circlexxs {

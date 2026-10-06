@@ -4,26 +4,24 @@
     position: absolute;
     right: 24px;
     top: 24px;
-    background: $glass-dark;
-    backdrop-filter: blur($glass-blur);
-    -webkit-backdrop-filter: blur($glass-blur);
-    border: 1px solid $glass-border-dark;
-    border-radius: 12px;
+    border: $border-thick;
+    border-radius: $radius-sm;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 12px;
     padding-right: 8px;
-    height: 40px;
-    box-shadow: $shadow-sm;
-    transition: $transition-smooth;
+    height: 42px;
+    box-shadow: $shadow-brutal-sm;
+    transition: $transition-fast;
 
     p {
         margin: 0;
         padding: 0;
         margin-right: 4px;
-        font-weight: 600;
+        font-weight: 700;
         font-size: 14px;
+        font-family: 'Space Mono', monospace;
         letter-spacing: 0.3px;
     }
 }
