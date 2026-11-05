@@ -311,7 +311,7 @@ Variables prefixed `NEXT_PUBLIC_` are included in browser code. Never put databa
 
 1. Open the frontend and choose **Create a Room**.
 2. Enter a username and room name, then create the room.
-3. Dismiss the controls panel and copy the room ID using **🔗 Copy ID** or the `/room/<ID>` URL.
+3. Dismiss the controls panel and copy the room ID using **Copy ID** or the `/room/<ID>` URL.
 4. In another browser tab, choose **Join Existing Room** and enter a username and that ID.
 5. Draw in either tab and confirm that the other updates.
 
@@ -322,15 +322,17 @@ Room names are limited to 100 characters. The browser requires a username of 1�
 | Draw | Left-click and drag, or single-finger touch |
 | Move your view | Right-click and drag |
 | Zoom | Mouse wheel |
-| Change colour | Colour bar |
-| Select pencil, eraser, or thickness | Drawing tools menu, opened with the book icon |
-| Export drawings | **💾 Save Canvas**; downloads JSON in `canvas.txt` |
-| Import drawings | **📤 Import Canvas**; appends to the shared board |
-| Copy room ID | **🔗 Copy ID** |
-| Switch rooms | **🚪 Change Room** |
-| Change theme | **💡 Change Theme** |
-| Clear for everyone | **🗑️ Clear Board for Everyone**, then confirm |
+| Change colour | Colour bar; **Adaptive ink** follows the active theme |
+| Select pencil, eraser, or thickness | **Open tools menu** (sliders icon) |
+| Export drawings | **Save Canvas**; downloads JSON in `canvas.txt` |
+| Import drawings | **Import Canvas**; appends to the shared board |
+| Copy room ID | **Copy ID** |
+| Switch rooms | **Change Room** |
+| Change theme | **Switch to dark mode** / **Switch to light mode** (moon/sun icon) |
+| Clear for everyone | **Clear Board for Everyone**, then confirm |
 | Restore a connection | **Retry connection** in the error panel |
+
+Neutral dark/light ink is rendered with contrast for each participant's theme, including saved or imported strokes. Accent colours stay unchanged. Theme changes do not rewrite stored colours or exported files. Icon buttons have accessible names, tooltips where applicable, and keyboard controls.
 
 Clearing deletes saved operations in the current room and cannot be undone. Imported drawings are shared with other participants, not shown as a private preview. A canvas export is not a complete database backup.
 
@@ -392,10 +394,10 @@ Start the backend and MongoDB separately. Validate the production-build flow in 
 
 ```bash
 (cd server && bash mvnw test)
-(cd frontend && node --test tests/boardOperations.test.cjs)
+(cd frontend && node --test tests/*.test.cjs)
 ```
 
-Backend tests cover room and drawing services. Frontend tests cover drawing conversion, validation, deduplication, and history replay. Unit tests do not replace integration checks against a running database and browser clients.
+Backend tests cover room and drawing services. Frontend tests cover drawing conversion, validation, deduplication, history replay, and theme-aware ink colours. Unit tests do not replace integration checks against a running database and browser clients.
 
 ### Browser verification checklist
 

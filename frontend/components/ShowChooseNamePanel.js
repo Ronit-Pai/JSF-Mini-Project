@@ -4,6 +4,7 @@ import CustomizedSnackbar from './CustomizedSnackbar';
 import {createRoom} from '../utils/createRoom';
 import { useRouter } from 'next/router'
 import Spinner from './Spinner';
+import Icon from './Icon';
 import { getRoom } from '../utils/getRoom';
 import { apiErrorMessage } from '../utils/utils';
 
@@ -79,8 +80,9 @@ function ShowChooseNamePanel() {
     const handleCreateRoom = () => enterRoom(true);
     const handleJoinRoom = () => enterRoom(false);
 
-    const changePanel = () => {
-        setShowCreateRoom(!showCreateRoom)
+    const changePanel = create => {
+        if (create === showCreateRoom) return;
+        setShowCreateRoom(create)
         setButton(styles.closeBtnDisabled)
     }
 
@@ -96,32 +98,32 @@ function ShowChooseNamePanel() {
                         <div className={styles.inner}>
                             <div className={styles.top}>
                                 <div className={styles.tabs}>
-                                    <p style={{borderBottom: showCreateRoom ? '3px solid #1a1a2e' : 'none'}} onClick={changePanel}>Create a Room</p>
-                                    <p style={{borderBottom: !showCreateRoom ? '3px solid #1a1a2e' : 'none'}} onClick={changePanel}>Join Existing Room</p>
+                                    <button type="button" aria-pressed={showCreateRoom} onClick={() => changePanel(true)}>Create a Room</button>
+                                    <button type="button" aria-pressed={!showCreateRoom} onClick={() => changePanel(false)}>Join Existing Room</button>
                                 </div>
                             </div>
                             <div className={styles.middle}>
                                 <div className={styles.enterUsername}>
-                                    <p>Pick a username: 👉 </p>
-                                    <input className={styles.input} placeholder="Username" value={username} maxLength={80} ref={usernameRef} onChange={handleInputChange}/>
+                                    <label htmlFor="username">Pick a username: <Icon name="user" size={18} /></label>
+                                    <input id="username" className={styles.input} placeholder="Username" value={username} maxLength={80} ref={usernameRef} onChange={handleInputChange}/>
                                 </div>
                                 {showCreateRoom
                                     ?   <>
                                             <div className={styles.enterUsername}>
-                                                <p>Pick a room name: 👉</p>
-                                                <input className={styles.input} placeholder="Room Name" value={roomName} maxLength={100} ref={roomNameRef} onChange={handleRoomNameChange}/>
+                                                <label htmlFor="room-name">Pick a room name: <Icon name="room" size={18} /></label>
+                                                <input id="room-name" className={styles.input} placeholder="Room Name" value={roomName} maxLength={100} ref={roomNameRef} onChange={handleRoomNameChange}/>
                                             </div>
                                         </>
                                     :   <div className={styles.enterUsername}>
-                                            <p>Enter Room Address: 👉</p>
-                                            <input className={styles.input} placeholder="Room Address" value={roomAddress} ref={roomAddressRef} onChange={handleRoomAddressChange}/>
+                                            <label htmlFor="room-address">Enter Room Address: <Icon name="link" size={18} /></label>
+                                            <input id="room-address" className={styles.input} placeholder="Room Address" value={roomAddress} ref={roomAddressRef} onChange={handleRoomAddressChange}/>
                                         </div>
                                 }
                             </div>
                             <div className={styles.bottom}>
                                 {showCreateRoom
-                                    ?   <div className={button} onClick={handleCreateRoom}>Create Room</div>
-                                    :   <div className={button} onClick={handleJoinRoom}>Join Room</div>                      
+                                    ?   <button type="button" className={button} onClick={handleCreateRoom} disabled={button === styles.closeBtnDisabled}>Create Room</button>
+                                    :   <button type="button" className={button} onClick={handleJoinRoom} disabled={button === styles.closeBtnDisabled}>Join Room</button>
                                 }
                             </div>
                         </div>

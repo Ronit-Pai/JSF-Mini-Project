@@ -1,71 +1,50 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { ThemeContext } from "../context/ThemeContext";
-import SelectThicknessSlider from "./SelectThicknessSlider";
 import SelectInstrument from "./SelectInstrument";
+import Icon from "./Icon";
 import styles from "../styles/MoreActionsBar.module.scss";
 
-function MoreActionsBar({
-  lineWidth,
-  setLineWidth,
-  setInstrument,
-  instrument,
-  color,
-}) {
-  const { theme, toggle, dark } = React.useContext(ThemeContext);
-
-  const [backgroundColor, setBackgroundColor] = useState("#E2E6EA");
-  const [width, setWidth] = useState(45);
-  const [height, setHeight] = useState(45);
+function MoreActionsBar({lineWidth, setLineWidth, setInstrument, instrument, color}) {
+  const { theme } = React.useContext(ThemeContext);
   const [isMenuOpened, setIsMenuOpened] = useState(false);
-
-  useEffect(() => {
-    if (!theme.secondaryColor) return;
-    setBackgroundColor(theme.secondaryColor);
-  }, [theme]);
-
-  const openMenu = () => {
-    setHeight(180);
-    setIsMenuOpened(true);
-  };
+  const toggleRef = useRef(null);
 
   const closeMenu = () => {
-    setHeight(45);
     setIsMenuOpened(false);
-  };
-
-  const Menu = () => {
-    return (
-      <div className={styles.menuInner}>
-        <div className={styles.closeMenu} onClick={closeMenu}>
-          📕
-        </div>
-        <SelectInstrument
-          color={color}
-          setInstrument={setInstrument}
-          instrument={instrument}
-          lineWidth={lineWidth}
-          setLineWidth={setLineWidth}
-        />
-      </div>
-    );
+    toggleRef.current.focus();
   };
 
   return (
     <div
       className={styles.moreActionsBar}
-      style={{
-        background: `${backgroundColor}`,
-        width: `${width}px`,
-        height: `${height}px`,
+      style={{background: theme.secondaryColor, color: theme.color, height: isMenuOpened ? 180 : 45}}
+      onKeyDown={event => {
+        if (event.key === "Escape" && isMenuOpened) {
+          event.stopPropagation();
+          closeMenu();
+        }
       }}
     >
-      {isMenuOpened ? (
-        Menu()
-      ) : (
-        <div className={styles.openMenu} onClick={openMenu}>
-          📖
-        </div>
-      )}
+      <button
+        type="button"
+        ref={toggleRef}
+        className={styles.menuToggle}
+        onClick={() => setIsMenuOpened(!isMenuOpened)}
+        aria-label={isMenuOpened ? "Close tools menu" : "Open tools menu"}
+        aria-expanded={isMenuOpened}
+        aria-controls="drawing-tools"
+      >
+        <Icon name={isMenuOpened ? "close" : "tools"} />
+      </button>
+      <div id="drawing-tools" className={styles.menuInner} hidden={!isMenuOpened}>
+        {isMenuOpened && <SelectInstrument
+          color={color}
+          setInstrument={setInstrument}
+          instrument={instrument}
+          lineWidth={lineWidth}
+          setLineWidth={setLineWidth}
+        />}
+      </div>
     </div>
   );
 }

@@ -27,6 +27,14 @@
         box-shadow: $shadow-brutal-lg;
         animation: slideUp 0.25s ease;
 
+        button {
+            font-family: inherit;
+            &:focus-visible {
+                outline: 3px solid $text-primary-light;
+                outline-offset: 3px;
+            }
+        }
+
         .top {
             width: 100%;
             display: flex;
@@ -42,7 +50,12 @@
             justify-content: center;
             align-items: center;
             padding: 8px 0px;
-            p {
+            gap: 8px;
+            label {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                margin: 8px 0;
                 color: $text-primary-light;
                 font-weight: 700;
                 font-size: 15px;
@@ -140,9 +153,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            p {
-                margin-left: 10px;
-                margin-right: 10px;
+            button {
+                background: transparent;
+                border: 0;
+                border-bottom: 3px solid transparent;
+                margin: 15px 10px;
+                padding: 0;
+                &[aria-pressed='true'] {
+                    border-bottom-color: $text-primary-light;
+                }
                 cursor: pointer;
                 transition: $transition-fast;
                 color: $text-primary-light;
@@ -195,7 +214,8 @@
                 border: $border-thin;
                 background: $accent-primary;
                 box-shadow: $shadow-brutal-sm;
-                color: #fff;
+                padding: 0;
+                flex-shrink: 0;
                 &:hover {
                     transform: translate(1px, 1px);
                     box-shadow: $shadow-brutal-pressed;
@@ -282,12 +302,12 @@
                 margin-bottom: 12px;
             }
 
-            p {
+            label {
                 margin-bottom: 8px;
             }
         }
 
-        .tabs p {
+        .tabs button {
             font-size: 13px;
             margin-left: 6px;
             margin-right: 6px;

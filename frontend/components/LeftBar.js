@@ -1,24 +1,21 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import styles from '../styles/LeftBar.module.scss'
 import { ThemeContext } from '../context/ThemeContext'
 import CreateTooltip from './CreateTooltip';
+import Icon from './Icon';
 
 function LeftBar({save, disabled, importFile}) {
-    const { theme, toggle, dark } = React.useContext(ThemeContext)
-    const [backgroundColor, setBackgroundColor] = useState('#E2E6EA');
-
-    useEffect(() => {
-        if(!theme.secondaryColor) return;
-        setBackgroundColor(theme.secondaryColor);
-    }, [theme])
+    const { theme } = React.useContext(ThemeContext)
+    const backgroundColor = theme.secondaryColor;
 
     return (
         <div className={styles.leftbar}>
             <CreateTooltip
                 id='save'
-                background={{background: `${disabled ? 'rgba(255,255,255,0.04)' : backgroundColor}`}}
+                background={{background: backgroundColor, color: theme.color}}
                 action={save}
-                icon='💾'
+                disabled={disabled}
+                icon={<Icon name="save" />}
                 type={`${disabled ? 'error' : 'info'}`}
                 effect='solid'
                 text={'Save Canvas'}
@@ -26,9 +23,9 @@ function LeftBar({save, disabled, importFile}) {
 
             <CreateTooltip
                 id='import'
-                background={{background: `${backgroundColor}`}}
+                background={{background: backgroundColor, color: theme.color}}
                 action={importFile}
-                icon='📤'
+                icon={<Icon name="upload" />}
                 type={'info'}
                 effect='solid'
                 text={'Import Canvas'}

@@ -9,6 +9,20 @@
     justify-content: center;
     gap: 8px;
 
+    .toggleTheme, .undo {
+        padding: 0;
+        font: inherit;
+
+        &:focus-visible {
+            outline: 3px solid currentColor;
+            outline-offset: 3px;
+        }
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.45;
+        }
+    }
+
     .toggleTheme {
         border-radius: $radius-sm;
         width: 46px;
@@ -21,11 +35,11 @@
         border: $border-thick;
         transition: $transition-fast;
         box-shadow: $shadow-brutal-sm;
-        &:hover {
+        &:hover:not(:disabled) {
             transform: translate(2px, 2px);
             box-shadow: $shadow-brutal-pressed;
         }
-        &:active {
+        &:active:not(:disabled) {
             transform: translate(3px, 3px);
             box-shadow: none;
         }
@@ -44,11 +58,11 @@
         border: $border-thick;
         transition: $transition-fast;
         box-shadow: $shadow-brutal-sm;
-        &:hover {
+        &:hover:not(:disabled) {
             transform: translate(2px, 2px);
             box-shadow: $shadow-brutal-pressed;
         }
-        &:active {
+        &:active:not(:disabled) {
             transform: translate(3px, 3px);
             box-shadow: none;
         }
@@ -87,6 +101,9 @@
         }
 
         .scale {
+            position: absolute;
+            right: 0;
+            bottom: 52px;
             height: 40px;
             padding: 0 8px;
             font-size: 12px;

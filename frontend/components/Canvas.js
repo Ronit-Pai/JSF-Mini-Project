@@ -9,13 +9,15 @@ import MoreActionsBar from './MoreActionsBar';
 import { ThemeContext } from '../context/ThemeContext';
 import { saveAs } from 'file-saver';
 import { drawingEvent } from '../utils/boardOperations';
+import { getCanvasColour } from '../utils/canvasColours';
 import Spinner from './Spinner';
 
 function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersList, loading, ready, notify }) {
-    const { theme } = React.useContext(ThemeContext);
+    const { theme, dark } = React.useContext(ThemeContext);
     const [lineWidth, setLineWidth] = useState(3);
     const [instrument, setInstrument] = useState('pencil');
-    const [strokeStyle, setStrokeStyle] = useState('#1a1a2e');
+    const [selectedColour, setSelectedColour] = useState(null);
+    const strokeStyle = getCanvasColour(selectedColour, dark);
     const [showFileUploader, setShowFileUploader] = useState(false);
     const [showInfoPanel, setShowInfoPanel] = useState(true);
     const [cursor, setCursor] = useState({ x: 0, y: 0 });
@@ -42,8 +44,9 @@ function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersLis
             const points = drawing.points;
             if (!points || !points.length) return;
             context.globalCompositeOperation = drawing.tool === 'eraser' ? 'destination-out' : 'source-over';
-            context.strokeStyle = drawing.colour;
-            context.fillStyle = drawing.colour;
+            const colour = getCanvasColour(drawing.colour, dark);
+            context.strokeStyle = colour;
+            context.fillStyle = colour;
             context.lineWidth = drawing.width;
             context.beginPath();
             if (points.length === 1 || points.every(point => point.x === points[0].x && point.y === points[0].y)) {
@@ -55,7 +58,7 @@ function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersLis
                 context.stroke();
             }
         });
-    }, [drawings, view]);
+    }, [drawings, view, dark]);
 
     useEffect(() => {
         redrawCanvas();
@@ -159,7 +162,7 @@ function Canvas({ sendMessage, clearBoard, setRoomId, drawings, roomId, usersLis
             {loading && <div style={{ background: theme.backgroundColor, position: 'absolute', zIndex: 99999999, width: '100vw', height: '100vh' }}>
                 <Spinner color="#ff6b6b" loading={loading} connecting={true} />
             </div>}
-            <ColorPickerBar setStrokeStyle={setStrokeStyle} />
+            <ColorPickerBar selectedColour={selectedColour} setSelectedColour={setSelectedColour} />
             <LeftBar save={save} disabled={disabled} importFile={() => setShowFileUploader(true)} />
             <OnlineUsers usersList={usersList} />
             {showFileUploader && <FileUploader setShowFileUploader={setShowFileUploader} setTextReadFromFile={importFile} />}

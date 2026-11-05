@@ -1,24 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import styles from '../styles/OnlineUsers.module.scss'
 import { ThemeContext } from '../context/ThemeContext'
+import Icon from './Icon';
 
 function OnlineUsers({usersList}) {
-    const { theme, toggle, dark } = React.useContext(ThemeContext)
-    const [backgroundColor, setBackgroundColor] = useState('#E2E6EA');
-    const [color, setColor] = useState('#222');
-
-    useEffect(() => {
-        if(!theme.secondaryColor) return;
-        setBackgroundColor(theme.secondaryColor);
-
-        if(!theme.color) return;
-        setColor(theme.color);
-    }, [theme])
+    const { theme } = React.useContext(ThemeContext)
 
     return (
-        <div className={styles.onlineUsers} style={{background: `${backgroundColor}`, color: `${color}`}}>
-            <p>{usersList.length}</p>
-            <p>👤</p>
+        <div className={styles.onlineUsers} style={{background: theme.secondaryColor, color: theme.color}} role="status" aria-label={`${usersList.length} online ${usersList.length === 1 ? 'user' : 'users'}`}>
+            <p aria-hidden="true">{usersList.length}</p>
+            <Icon name="users" size={20} />
         </div>
     )
 }

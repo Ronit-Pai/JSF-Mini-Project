@@ -1,100 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import Icon from "./Icon";
 import styles from "../styles/SelectInstrument.module.scss";
 
-function SelectInstrument({
-  setInstrument,
-  instrument,
-  lineWidth,
-  setLineWidth,
-  color
-}) {
+const thicknesses = [3, 10, 15, 20, 25, 30, 35, 40];
+
+function SelectInstrument({setInstrument, instrument, lineWidth, setLineWidth, color}) {
   const { theme } = React.useContext(ThemeContext);
-
-  const [width, setWidth] = useState(0);
   const [showPencilMenu, setShowPencilMenu] = useState(false);
-
-  const openPencilMenu = () => {
-    if (!showPencilMenu) {
-      setShowPencilMenu(true);
-      setWidth(160);
-    } else return;
-  };
-
-  const closePencilMenu = () => {
-    setShowPencilMenu(false);
-    setWidth(0);
-  };
+  const pencilRef = useRef(null);
 
   return (
     <div className={styles.selectInstrument}>
       <div
-        className={styles.instrument}
-        style={{ background: instrument === "pencil" && "#bbb" }}
-        onClick={() => setInstrument("pencil")}
-        onMouseEnter={openPencilMenu}
-        onMouseLeave={closePencilMenu}
+        className={styles.pencilGroup}
+        onKeyDown={event => {
+          if (event.key === "Escape" && showPencilMenu) {
+            event.stopPropagation();
+            setShowPencilMenu(false);
+            pencilRef.current.focus();
+          }
+        }}
       >
-        ✒️
-        <div
-          className={styles.pencilMenu}
-          style={{ background: theme.secondaryColor, width: `${width}px` }}
+        <button
+          type="button"
+          ref={pencilRef}
+          className={styles.instrument}
+          aria-label="Pencil"
+          aria-pressed={instrument === "pencil"}
+          aria-expanded={showPencilMenu}
+          aria-controls="pencil-thickness"
+          onClick={() => {
+            setInstrument("pencil");
+            setShowPencilMenu(!showPencilMenu);
+          }}
         >
-          <div className={styles.row}>
-            <div
-              className={styles.circlexxs}
-              style={{ background: lineWidth === 3 ? color : theme.backgroundColor }}
-              onClick={() => setLineWidth(3)}
-            ></div>
-            <div
-              className={styles.circlexs}
-              style={{ background: lineWidth === 10 ? color : theme.backgroundColor }}
-              onClick={() => setLineWidth(10)}
-            ></div>
-            <div
-              className={styles.circlesm}
-              style={{ background: lineWidth === 15 ? color : theme.backgroundColor }}
-              onClick={() => setLineWidth(15)}
-            ></div>
-            <div
-              className={styles.circlemd}
-              style={{ background: lineWidth === 20 ? color : theme.backgroundColor }}
-              onClick={() => setLineWidth(20)}
-            ></div>
-            <div
-              className={styles.circlelg}
-              style={{ background: lineWidth === 25 ? color : theme.backgroundColor }}
-              onClick={() => setLineWidth(25)}
-            ></div>
-          </div>
-          <div className={styles.row}>
-            <div
-              className={styles.circlexl}
-              style={{ background: lineWidth === 30 ? color : theme.backgroundColor }}
-              onClick={() => setLineWidth(30)}
-            ></div>
-            <div
-              className={styles.circlexxl}
-              style={{ background: lineWidth === 35 ? color : theme.backgroundColor }}
-              onClick={() => setLineWidth(35)}
-            ></div>
-            <div
-              className={styles.circlexxxl}
-              style={{ background: lineWidth === 40 ? color : theme.backgroundColor }}
-              onClick={() => setLineWidth(40)}
-            ></div>
-          </div>
+          <Icon name="pencil" />
+        </button>
+        <div
+          id="pencil-thickness"
+          className={styles.pencilMenu}
+          style={{background: theme.secondaryColor, color: theme.color}}
+          role="group"
+          aria-label="Pencil thickness"
+          hidden={!showPencilMenu}
+        >
+          {thicknesses.map(thickness => (
+            <button
+              key={thickness}
+              type="button"
+              className={styles.thickness}
+              aria-label={`Pencil thickness ${thickness}`}
+              aria-pressed={lineWidth === thickness}
+              onClick={() => setLineWidth(thickness)}
+            >
+              <span
+                className={styles.dot}
+                style={{width: thickness, height: thickness, background: lineWidth === thickness ? color : theme.backgroundColor}}
+              />
+            </button>
+          ))}
         </div>
       </div>
-      <div
+      <button
+        type="button"
         className={styles.instrument}
-        style={{ background: instrument === "eraser" && "#bbb" }}
-        onClick={() => setInstrument("eraser")}
+        aria-label="Eraser"
+        aria-pressed={instrument === "eraser"}
+        onClick={() => {
+          setInstrument("eraser");
+          setShowPencilMenu(false);
+        }}
       >
-        🧹
-      </div>
+        <Icon name="eraser" />
+      </button>
     </div>
   );
 }
-/* 🖊️✏️📜 🖌️ */
+
 export default SelectInstrument;

@@ -7,80 +7,82 @@
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    font-size: 18px;
+
+    button {
+        padding: 0;
+        color: inherit;
+        cursor: pointer;
+        transition: $transition-fast;
+        &:focus-visible {
+            outline: 3px solid currentColor;
+            outline-offset: 3px;
+        }
+    }
+
     .instrument {
-        position: relative;
         width: 36px;
-        height: 36px;
+        height: 40px;
         border-radius: $radius-sm;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 5px;
-        transition: $transition-fast;
+        background: transparent;
         border: $border-thin;
+        &[aria-pressed='true'] {
+            background: $accent-secondary;
+            color: $text-primary-light;
+            box-shadow: $shadow-brutal-sm;
+        }
         &:hover {
-            background: $accent-secondary !important;
+            background: $accent-secondary;
+            color: $text-primary-light;
             transform: translate(1px, 1px);
         }
-        .pencilMenu {
-            border-radius: $radius-sm;
-            position: absolute;
-            top: 0;
-            left: 45px;
-            transition: $transition-smooth;
-            overflow: hidden;
-            border: $border-thick;
-            box-shadow: $shadow-brutal-md;
-            .row {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 10px 10px 2px 10px;
-                div {
-                    border-radius: 50%;
-                    cursor: pointer;
-                    transition: $transition-fast;
-                    border: $border-thin;
-                    &:hover {
-                        border-color: $accent-primary;
-                        transform: scale(1.15);
-                    }
-                }
-                .circlexxs {
-                    width: 5px;
-                    height: 5px;
-                }
-                .circlexs {
-                    width: 10px;
-                    height: 10px;
-                }
-                .circlesm {
-                    width: 15px;
-                    height: 15px;
-                }
-                .circlemd {
-                    width: 20px;
-                    height: 20px;
-                }
-                .circlelg {
-                    width: 25px;
-                    height: 25px;
-                }
-                .circlexl {
-                    width: 30px;
-                    height: 30px;
-                }
-                .circlexxl {
-                    width: 35px;
-                    height: 35px;
-                }
-                .circlexxxl {
-                    width: 40px;
-                    height: 40px;
-                }
-            }
+    }
+
+    .pencilGroup {
+        position: relative;
+    }
+
+    .pencilMenu {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 45px;
+        width: 200px;
+        padding: 5px;
+        display: grid;
+        grid-template-columns: repeat(4, 44px);
+        gap: 2px;
+        border-radius: $radius-sm;
+        border: $border-thick;
+        box-shadow: $shadow-brutal-md;
+        &[hidden] {
+            display: none;
         }
+    }
+
+    .thickness {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: 2px solid transparent;
+        border-radius: $radius-sm;
+        &[aria-pressed='true'] {
+            border-color: currentColor;
+        }
+        &:hover {
+            background: $accent-secondary;
+            color: $text-primary-light;
+        }
+    }
+
+    .dot {
+        display: block;
+        border-radius: 50%;
+        border: 1px solid currentColor;
     }
 }

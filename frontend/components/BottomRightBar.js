@@ -5,6 +5,7 @@ import { ThemeContext } from '../context/ThemeContext'
 import CustomizedSnackbar from './CustomizedSnackbar';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import CreateTooltip from './CreateTooltip';
+import Icon from './Icon';
 import dynamic from "next/dynamic";
 import {getRoom} from '../utils/getRoom'
 import { apiErrorMessage } from '../utils/utils';
@@ -14,23 +15,15 @@ const ReactTooltip = dynamic(() => import("react-tooltip"), {
 });
 
 function BottomRightBar({scale, undo, clearBoard, disabled, setRoomId, roomId}) {
-    const { theme, toggle, info } = React.useContext(ThemeContext);
-    const [backgroundColor, setBackgroundColor] = useState('#E2E6EA');
-    const [color, setColor] = useState('#222');
+    const { theme, toggle, dark } = React.useContext(ThemeContext);
+    const backgroundColor = theme.secondaryColor;
+    const color = theme.color;
     const [showJoinRoomPanel, setShowJoinRoomPanel] = useState(false);
     const roomIdRef = useRef(null);
     const [showSnackbar, setShowSnackbar] = useState(false);
     const [button, setButton] = useState(infoPanelStyles.closeBtnDisabled);
     const [snackbarMsg, setSnackbarMsg] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-
-    useEffect(() => {
-        if(!theme.secondaryColor) return;
-        setBackgroundColor(theme.secondaryColor);
-
-        if(!theme.color) return;
-        setColor(theme.color);
-    }, [theme])
 
     const setButtonStyle = () => {
         if(roomIdRef.current.value === '') {
@@ -89,17 +82,17 @@ function BottomRightBar({scale, undo, clearBoard, disabled, setRoomId, roomId}) 
                         <div className={infoPanelStyles.top}>
                             <div className={infoPanelStyles.paragraph}>
                                 <h1>Enter a room ID</h1>
-                                <div className={infoPanelStyles.close} onClick={() => setShowJoinRoomPanel(false)}>x</div>
+                                <button type="button" className={infoPanelStyles.close} onClick={() => setShowJoinRoomPanel(false)} aria-label="Close change room panel"><Icon name="close" size={20} /></button>
                             </div>
                         </div>
                         <div className={infoPanelStyles.middle}>
                             <div className={infoPanelStyles.enterId}>
-                                <h1 className={infoPanelStyles.heading}>Enter ID:</h1>
-                                <input className={infoPanelStyles.input} placeholder="fkjsldwkwqrn" ref={roomIdRef} onChange={setButtonStyle}/>
+                                <label className={infoPanelStyles.heading} htmlFor="change-room-id">Enter ID:</label>
+                                <input id="change-room-id" className={infoPanelStyles.input} placeholder="fkjsldwkwqrn" ref={roomIdRef} onChange={setButtonStyle}/>
                             </div>
                         </div>
                         <div className={infoPanelStyles.bottom}>
-                            <div className={button} onClick={changeRoom}>Join Room</div>
+                            <button type="button" className={button} onClick={changeRoom} disabled={button === infoPanelStyles.closeBtnDisabled}>Join Room</button>
                         </div>
                     </div>
                 </div>
@@ -107,17 +100,16 @@ function BottomRightBar({scale, undo, clearBoard, disabled, setRoomId, roomId}) 
             <div className={styles.bottomRightBar}> 
 
                 {/* Copy Current Room ID */}
-                <CopyToClipboard
-                    text={roomId}
-                    onCopy={copyID}
-                >
-                    <div>
-                        <a data-tip data-for='copyRoomAddress' className={styles.toggleTheme} style={{background: `${backgroundColor}`, color: `${color}`}}> 🔗 </a>
-                        <ReactTooltip id='copyRoomAddress' type='info' effect="solid">
-                            <span>Copy ID </span>
-                        </ReactTooltip>
-                    </div>
-                </CopyToClipboard>
+                <div>
+                    <CopyToClipboard text={roomId} onCopy={copyID}>
+                        <button type="button" data-tip data-for='copyRoomAddress' aria-label="Copy ID" className={styles.toggleTheme} style={{background: backgroundColor, color}}>
+                            <Icon name="copy" />
+                        </button>
+                    </CopyToClipboard>
+                    <ReactTooltip id='copyRoomAddress' type='info' effect="solid">
+                        <span>Copy ID </span>
+                    </ReactTooltip>
+                </div>
 
                 {/* Change Room */}
                 <CreateTooltip
@@ -125,7 +117,7 @@ function BottomRightBar({scale, undo, clearBoard, disabled, setRoomId, roomId}) 
                     background={{background: `${backgroundColor}`, color: `${color}`}}
                     action={() => setShowJoinRoomPanel(!showJoinRoomPanel)}
                     stylesClass={styles.toggleTheme}
-                    icon='🚪'
+                    icon={<Icon name="door" />}
                     type={'info'}
                     effect='solid'
                     text={'Change Room'}
@@ -134,10 +126,11 @@ function BottomRightBar({scale, undo, clearBoard, disabled, setRoomId, roomId}) 
                 {/* Toggle theme */}
                 <CreateTooltip
                     id='toggleTheme'
-                    background={{background: `${backgroundColor}`}}
+                    background={{background: backgroundColor, color}}
                     action={toggle}
                     stylesClass={styles.toggleTheme}
-                    icon='💡'
+                    icon={<Icon name={dark ? 'sun' : 'moon'} />}
+                    label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
                     type={'info'}
                     effect='solid'
                     text={'Change Theme'}
@@ -145,10 +138,11 @@ function BottomRightBar({scale, undo, clearBoard, disabled, setRoomId, roomId}) 
 
                 <CreateTooltip
                     id='clearBoard'
-                    background={{background: `${disabled ? 'rgba(255,255,255,0.04)' : backgroundColor}`}}
+                    background={{background: backgroundColor, color}}
+                    disabled={disabled}
                     action={() => { if (!disabled) clearBoard(); }}
                     stylesClass={styles.toggleTheme}
-                    icon='🗑️'
+                    icon={<Icon name="trash" />}
                     type='info'
                     effect='solid'
                     text='Clear Board for Everyone'
@@ -157,10 +151,11 @@ function BottomRightBar({scale, undo, clearBoard, disabled, setRoomId, roomId}) 
                 {/* Undo */}
                 <CreateTooltip
                     id='undo'
-                    background={{background: `${disabled ? 'rgba(255,255,255,0.04)' : backgroundColor}`}}
+                    background={{background: backgroundColor, color}}
+                    disabled={disabled}
                     action={undo}
                     stylesClass={styles.undo}
-                    icon='↺'
+                    icon={<Icon name="undo" />}
                     type={`${disabled ? 'error' : 'info'}`}
                     effect='solid'
                     text={'Undo'}

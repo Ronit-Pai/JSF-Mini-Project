@@ -1,30 +1,34 @@
 import React from 'react'
 import styles from '../styles/ColorPickerBar.module.scss'
+import { ThemeContext } from '../context/ThemeContext'
+import { getCanvasColour } from '../utils/canvasColours'
 
-function ColorPickerBar({setStrokeStyle}) {
-    const colorList = [
-        '#1a1a2e',
-        '#ff6b6b',
-        '#ff922b',
-        '#ffd93d',
-        '#51cf66',
-        '#6bcbff',
-        '#cc5de8',
-        '#ffffff',
-    ];
+const colours = [
+    { name: 'Adaptive ink', colour: null },
+    { name: 'Red ink', colour: '#ff6b6b' },
+    { name: 'Orange ink', colour: '#ff922b' },
+    { name: 'Yellow ink', colour: '#ffd93d' },
+    { name: 'Green ink', colour: '#51cf66' },
+    { name: 'Blue ink', colour: '#6bcbff' },
+    { name: 'Purple ink', colour: '#cc5de8' },
+];
 
-    const changeStrokeStyle = (color) => {
-        setStrokeStyle(color);
-    }
+function ColorPickerBar({ selectedColour, setSelectedColour }) {
+    const { dark } = React.useContext(ThemeContext);
 
     return (
-        <div className={styles.colorPickerBarscss}>
-            {colorList.map((color, index) => 
-                <div 
-                    key={index}
-                    style={{background: `${color}`}}
-                    onClick={() => changeStrokeStyle(color)}
-                />)}
+        <div className={styles.colorPickerBarscss} role="group" aria-label="Drawing colours">
+            {colours.map(({ name, colour }) => (
+                <button
+                    key={name}
+                    type="button"
+                    aria-label={name}
+                    aria-pressed={selectedColour === colour}
+                    title={colour === null ? 'Adaptive ink: stays visible in both themes' : name}
+                    style={{ background: getCanvasColour(colour, dark) }}
+                    onClick={() => setSelectedColour(colour)}
+                />
+            ))}
         </div>
     )
 }
