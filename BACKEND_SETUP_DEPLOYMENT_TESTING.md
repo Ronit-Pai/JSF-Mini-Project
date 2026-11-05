@@ -12,7 +12,7 @@ No credentials are committed. Start from `server/.env.example` and set a private
 
 ## Local development
 
-1. Start MongoDB with `docker compose -f server/docker-compose.yaml up mongodb`.
+1. Start MongoDB with `docker compose up -d mongodb` from the project root.
 2. In PowerShell, set local configuration if it differs from the defaults:
 
    ```powershell
@@ -77,10 +77,9 @@ The unit tests cover server-generated room IDs, missing-room handling, and room-
 
 ## Container deployment
 
-For local container verification, run:
+To run MongoDB, the backend, and frontend together from the project root:
 
 ```powershell
-cd server
 docker compose up --build
 ```
 

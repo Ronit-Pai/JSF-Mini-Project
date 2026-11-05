@@ -54,6 +54,7 @@ MongoDB: rooms and drawing_operations collections
 .
 ├── README.md
 ├── BACKEND_SETUP_DEPLOYMENT_TESTING.md
+├── docker-compose.yaml               # Runs MongoDB, backend, and frontend
 ├── run-local.sh                      # Linux launcher for all three services
 ├── stop-local.sh                     # Stops services owned by the launcher
 ├── frontend/
@@ -63,7 +64,8 @@ MongoDB: rooms and drawing_operations collections
 │   ├── utils/                        # API helpers and drawing operations
 │   ├── tests/                        # Drawing-operation tests
 │   ├── package.json
-│   └── package-lock.json
+│   ├── package-lock.json
+│   └── Dockerfile
 ├── server/
 │   ├── mvnw                          # Maven wrapper for Unix-like shells
 │   ├── mvnw.cmd                      # Maven wrapper for Windows
@@ -71,8 +73,7 @@ MongoDB: rooms and drawing_operations collections
 │   ├── src/main/                     # Spring Boot application
 │   ├── src/test/                     # Backend tests
 │   ├── .env.example                  # Configuration reference
-│   ├── Dockerfile
-│   └── docker-compose.yaml
+│   └── Dockerfile
 └── .local/                           # Generated locally; excluded from Git
     ├── mongodb/                      # Data for a manually started local database
     └── logs/                         # Service logs
@@ -524,31 +525,30 @@ For an empty development database, stop the database and move its data directory
 
 ## Docker alternative
 
-`server/docker-compose.yaml` defines **MongoDB and the backend only**. Start Next.js separately.
+The root `docker-compose.yaml` runs MongoDB, the Spring Boot backend, and the Next.js frontend together.
 
 Before starting containers:
 
 1. Install Docker with Compose and confirm authorized access to the daemon.
-2. Stop conflicting native services on ports 8080 and 27017.
-3. Review port exposure: the supplied Compose file publishes on all host interfaces. For local-only access, change the database mapping to `127.0.0.1:27017:27017` and the backend mapping to `127.0.0.1:8080:8080`.
+2. Stop conflicting native services on ports 3000, 8080, and 27017.
 
 From the project root:
 
 ```bash
-docker compose -f server/docker-compose.yaml up --build
+docker compose up --build
 ```
 
-Then start the frontend using the commands in [getting started](#getting-started). Use `http://localhost:3000`, which matches the allowed origin in the Compose file.
+Open **http://localhost:3000** after all three services have started. The frontend calls the backend at `http://localhost:8080`, and the database and backend ports are bound to localhost.
 
 Stop containers with:
 
 ```bash
-docker compose -f server/docker-compose.yaml down
+docker compose down
 ```
 
 The Docker volume is separate from `.local/mongodb/`; switching startup methods does not migrate data. `down` preserves the named volume unless `--volumes` is added, which deletes its data.
 
-The Dockerfile skips tests during packaging. Run tests separately and validate container startup and health in your environment.
+The backend Dockerfile skips tests during packaging. Run tests separately and validate container startup and health in your environment.
 
 ## Troubleshooting
 
