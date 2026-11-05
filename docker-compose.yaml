@@ -1,3 +1,4 @@
+
 services:
   mongodb:
     image: mongo:7
@@ -17,8 +18,11 @@ services:
     ports:
       - "127.0.0.1:8080:8080"
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/collabcanvas
-      CORS_ALLOWED_ORIGINS: http://localhost:3000
+      PORT: 8080
+      MONGODB_URI: ${MONGODB_URI:-mongodb://mongodb:27017/collabcanvas}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:3000}
+      WEBSOCKET_MAX_PAYLOAD_BYTES: ${WEBSOCKET_MAX_PAYLOAD_BYTES:-65536}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-prod}
     depends_on:
       mongodb:
         condition: service_healthy
@@ -27,7 +31,7 @@ services:
     build:
       context: ./frontend
       args:
-        NEXT_PUBLIC_API_BASE_URL: http://localhost:8080
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8080}
     ports:
       - "127.0.0.1:3000:3000"
     depends_on:
@@ -36,3 +40,4 @@ services:
 
 volumes:
   mongo-data:
+
