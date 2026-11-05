@@ -2,8 +2,6 @@
 services:
   mongodb:
     image: mongo:7
-    ports:
-      - "127.0.0.1:27017:27017"
     volumes:
       - mongo-data:/data/db
     healthcheck:
@@ -15,8 +13,8 @@ services:
   backend:
     build:
       context: ./server
-    ports:
-      - "127.0.0.1:8080:8080"
+    expose:
+      - "8080"
     environment:
       PORT: 8080
       MONGODB_URI: ${MONGODB_URI:-mongodb://mongodb:27017/collabcanvas}
@@ -32,12 +30,11 @@ services:
       context: ./frontend
       args:
         NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8080}
-    ports:
-      - "127.0.0.1:3000:3000"
+    expose:
+      - "3000"
     depends_on:
       backend:
         condition: service_healthy
 
 volumes:
   mongo-data:
-

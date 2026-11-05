@@ -55,6 +55,7 @@ MongoDB: rooms and drawing_operations collections
 ├── README.md
 ├── BACKEND_SETUP_DEPLOYMENT_TESTING.md
 ├── docker-compose.yaml               # Runs MongoDB, backend, and frontend
+├── docker-compose.local.yaml         # Publishes local-only ports for Docker development
 ├── run-local.sh                      # Linux launcher for all three services
 ├── stop-local.sh                     # Stops services owned by the launcher
 ├── frontend/
@@ -525,9 +526,9 @@ For an empty development database, stop the database and move its data directory
 
 ## Docker alternative
 
-The root `docker-compose.yaml` runs MongoDB, the Spring Boot backend, and the Next.js frontend together.
+The root `docker-compose.yaml` runs MongoDB, the Spring Boot backend, and the Next.js frontend together without publishing container ports on the host. This is suitable for platforms such as Coolify that route traffic to container ports.
 
-Before starting containers:
+For local development, the `docker-compose.local.yaml` overlay publishes the services on loopback. Before starting:
 
 1. Install Docker with Compose and confirm authorized access to the daemon.
 2. Stop conflicting native services on ports 3000, 8080, and 27017.
@@ -535,20 +536,24 @@ Before starting containers:
 From the project root:
 
 ```bash
-docker compose up --build
+docker compose -f docker-compose.yaml -f docker-compose.local.yaml up --build
 ```
 
-Open **http://localhost:3000** after all three services have started. The frontend calls the backend at `http://localhost:8080`, and the database and backend ports are bound to localhost.
+Open **http://localhost:3000** after all three services have started. The frontend calls the backend at `http://localhost:8080`; published ports are bound only to localhost.
 
 Stop containers with:
 
 ```bash
-docker compose down
+docker compose -f docker-compose.yaml -f docker-compose.local.yaml down
 ```
 
 The Docker volume is separate from `.local/mongodb/`; switching startup methods does not migrate data. `down` preserves the named volume unless `--volumes` is added, which deletes its data.
 
 The backend Dockerfile skips tests during packaging. Run tests separately and validate container startup and health in your environment.
+
+### Coolify deployment
+
+Use the root `docker-compose.yaml` without the local overlay. Configure Coolify to route the frontend service to container port `3000` and the backend service to container port `8080`, each with its own public domain and HTTPS enabled. Set `NEXT_PUBLIC_API_BASE_URL` to the backend's public HTTPS URL and `CORS_ALLOWED_ORIGINS` to the frontend's exact HTTPS origin. These values must be present when the frontend image is built because the API URL is embedded in the browser bundle. MongoDB remains reachable only within the Compose network.
 
 ## Troubleshooting
 

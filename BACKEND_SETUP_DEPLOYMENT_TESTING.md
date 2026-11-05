@@ -12,7 +12,7 @@ No credentials are committed. Start from `server/.env.example` and set a private
 
 ## Local development
 
-1. Start MongoDB with `docker compose up -d mongodb` from the project root.
+1. Start MongoDB with `docker compose -f docker-compose.yaml -f docker-compose.local.yaml up -d mongodb` from the project root.
 2. In PowerShell, set local configuration if it differs from the defaults:
 
    ```powershell
@@ -80,7 +80,7 @@ The unit tests cover server-generated room IDs, missing-room handling, and room-
 To run MongoDB, the backend, and frontend together from the project root:
 
 ```powershell
-docker compose up --build
+docker compose -f docker-compose.yaml -f docker-compose.local.yaml up --build
 ```
 
 For a platform deployment, build and publish the `server/Dockerfile` image, then configure these environment variables in the platform's secret/settings interface:
@@ -93,6 +93,8 @@ WEBSOCKET_MAX_PAYLOAD_BYTES=65536
 ```
 
 Terminate TLS at the platform or reverse proxy and configure the frontend to use `https://` REST URLs and `wss://` WebSocket URLs. Do not use `*` for production origins. Ensure the proxy supports WebSocket upgrade requests and health-check `GET /actuator/health` after deployment. Set `SPRING_PROFILES_ACTIVE=prod` to enable graceful shutdown and forwarded-header support.
+
+For Coolify with the root Compose file, do not add host port mappings: route the frontend and backend services to container ports `3000` and `8080`. Set the frontend build argument `NEXT_PUBLIC_API_BASE_URL` to the backend's public HTTPS URL and set `CORS_ALLOWED_ORIGINS` to the frontend's exact public HTTPS origin. The local Compose overlay is for development only.
 
 ## Production smoke test
 

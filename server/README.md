@@ -83,7 +83,8 @@ the REST `POST` endpoint saves an operation but does not broadcast it.
 | File | What it does |
 | --- | --- |
 | `Dockerfile` | Builds the application in a Maven/JDK stage, copies the executable JAR into a Java 17 runtime image, exposes port 8080, and defines an Actuator health check. |
-| `../docker-compose.yaml` | Starts MongoDB, the backend, and frontend together for local container use, supplies their connection/CORS configuration, and keeps database files in a named volume. |
+| `../docker-compose.yaml` | Starts MongoDB, the backend, and frontend without publishing host ports, supplies their connection/CORS configuration, and keeps database files in a named volume. |
+| `../docker-compose.local.yaml` | Optional local-development overlay that publishes each service on loopback for browser and host access. |
 | `heroku.yml` | Directs Heroku's Docker-based build to use `Dockerfile` for its web process. |
 
 ### Java application source
